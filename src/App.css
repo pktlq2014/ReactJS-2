@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+.mt-50 {
+  margin-top: 5rem;
+}
+.mt-30 {
+  margin-top: 3rem;
+}
+span {
+  padding: 1rem 2rem;
+  margin: 1rem;
+  cursor: pointer;
+}
+.active {
+  border: solid 3px black;
+}
+#content {
+  padding: 1rem;
+  border: solid 3px red;
+}
