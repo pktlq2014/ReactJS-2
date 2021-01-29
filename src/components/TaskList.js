@@ -3,6 +3,16 @@ import TaskItem from './TaskItem';
 
 class TaskList extends Component {
     render() {
+        var {tasks} = this.props;
+        console.log(this.props.tasks);
+        var showTaskItem = tasks.map((values, index) => {
+            return <TaskItem
+                key={values.id}
+                index={index}
+                name={values.name}
+                status={values.status}
+            />
+        });
         return (
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <table class="table table-bordered table-hover">
@@ -29,7 +39,10 @@ class TaskList extends Component {
                             </td>
                             <td></td>
                         </tr>
-                        <TaskItem/>
+
+
+
+                        {showTaskItem}
                         </tbody>
                 </table>
             </div>

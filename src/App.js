@@ -3,7 +3,7 @@ import './App.css';
 import Product from './components/Product';
 import ProductTable from './components/ProductTable';
 import ColorPicker from './components/ColorPicker';
-import Reset from './components/Reset'; 
+import Reset from './components/Reset';
 import Result from './components/Result';
 import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList';
@@ -51,8 +51,48 @@ class App extends Component {
       txtTextArea: '',
       slGender: 0,
       rdLanguage: 'vi',
-      cbAgree: false
+      cbAgree: false,
+      tasks: []
     };
+  }
+  s4() {
+    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+  }
+  generateID() {
+    return (this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" +
+      this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" +
+      this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4()
+    )
+  }
+  componentDidMount() {
+    if(localStorage && localStorage.getItem("tasks")) {
+      this.setState({
+        tasks : JSON.parse(localStorage.getItem("tasks"))
+      });
+    }
+  }
+  onClick = (event) => {
+    var tasks = [
+      {
+        id : this.generateID(),
+        name : "AAA",
+        status : true
+      },
+      {
+        id : this.generateID(),
+        name : "BBB",
+        status : false
+      },
+      {
+        id : this.generateID(),
+        name : "CCC",
+        status : true
+      },
+    ]
+    this.setState({
+      tasks : tasks
+    });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }
   getValuesInput = (event) => {
     // this.setState({
@@ -105,6 +145,7 @@ class App extends Component {
     console.log(this.refs.name.value);
   }
   render() {
+    var {tasks} = this.state;
     var elementsProduct = this.state.products.map((values, index) => {
       var result = '';
       result = <ProductTable
@@ -135,7 +176,7 @@ class App extends Component {
           </div>
           <div class="row">
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-              <TaskForm/>
+              <TaskForm />
             </div>
 
 
@@ -144,15 +185,18 @@ class App extends Component {
               <button type="button" class="btn btn-primary">
                 <i class="fa fa-plus mr-5"></i>Thêm Công Việc
               </button>
+              <button type="button" class="btn btn-danger" onClick={this.onClick}>
+                <i class="fa fa-plus mr-5"></i>Generator
+              </button>
 
 
 
-              <Control/>
+              <Control />
 
 
 
               <div class="row mt-15">
-                <TaskList/>
+                <TaskList tasks={tasks}/>
               </div>
             </div>
           </div>

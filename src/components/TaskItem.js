@@ -3,11 +3,11 @@ class TaskItem extends Component {
   render() {
     return (
       <tr>
-        <td>1</td>
-        <td>Học lập trình</td>
+        <td>{this.props.index}</td>
+        <td>{this.props.name}</td>
         <td class="text-center">
-          <span class="label label-success">
-            Kích Hoạt
+          <span class={this.props.status === true ? 'label label-success' : 'label label-danger'}>
+            {this.props.status === true ? 'Kích Hoạt' : 'Ẩn'}
           </span>
         </td>
         <td class="text-center">
