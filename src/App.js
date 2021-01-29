@@ -3,8 +3,11 @@ import './App.css';
 import Product from './components/Product';
 import ProductTable from './components/ProductTable';
 import ColorPicker from './components/ColorPicker';
-import Reset from './components/Reset';
+import Reset from './components/Reset'; 
 import Result from './components/Result';
+import TaskForm from './components/TaskForm';
+import TaskList from './components/TaskList';
+import Control from './components/Control';
 import SizeSetting from './components/SizeSetting';
 class App extends Component {
   constructor(props) {
@@ -125,6 +128,38 @@ class App extends Component {
     });
     return (
       <div>
+        <div class="container">
+          <div class="text-center">
+            <h1>Quản Lý Công Việc</h1>
+            <hr />
+          </div>
+          <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <TaskForm/>
+            </div>
+
+
+
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+              <button type="button" class="btn btn-primary">
+                <i class="fa fa-plus mr-5"></i>Thêm Công Việc
+              </button>
+
+
+
+              <Control/>
+
+
+
+              <div class="row mt-15">
+                <TaskList/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
         <div className="container mt-30">
           <div className="row">
             <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8">

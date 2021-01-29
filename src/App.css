@@ -54,3 +54,16 @@ span {
   padding: 1rem;
   border: solid 3px red;
 }
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+.input-group {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.mr-15 {
+  margin-right: 5rem;
+}
