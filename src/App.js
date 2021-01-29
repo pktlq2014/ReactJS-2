@@ -52,8 +52,29 @@ class App extends Component {
       slGender: 0,
       rdLanguage: 'vi',
       cbAgree: false,
-      tasks: []
+      tasks: [],
+      status : false
     };
+  }
+  receiveDataFromTaskForm = (data) => {
+    if(data === 0) {
+      this.setState({
+        status : false
+      });
+    }
+  }
+  showTaskForm = () => {
+    var {status} = this.state;
+    if(status === true) {
+      this.setState({
+        status : false
+      });
+    }
+    else {
+      this.setState({
+        status : true
+      });
+    }
   }
   s4() {
     return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
@@ -145,6 +166,7 @@ class App extends Component {
     console.log(this.refs.name.value);
   }
   render() {
+    var status = this.state.status === false ? '' : <TaskForm receiveDataFromTaskForm={this.receiveDataFromTaskForm}/>
     var {tasks} = this.state;
     var elementsProduct = this.state.products.map((values, index) => {
       var result = '';
@@ -175,14 +197,14 @@ class App extends Component {
             <hr />
           </div>
           <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-              <TaskForm />
+            <div class={this.state.status === true ? 'col-xs-4 col-sm-4 col-md-4 col-lg-4' : 'col-xs-0 col-sm-0 col-md-0 col-lg-0'}>
+              {status}
             </div>
 
 
 
-            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-              <button type="button" class="btn btn-primary">
+            <div class={this.state.status === true ? 'col-xs-8 col-sm-8 col-md-8 col-lg-8' : 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}>
+              <button type="button" class="btn btn-primary" onClick={this.showTaskForm}>
                 <i class="fa fa-plus mr-5"></i>Thêm Công Việc
               </button>
               <button type="button" class="btn btn-danger" onClick={this.onClick}>
