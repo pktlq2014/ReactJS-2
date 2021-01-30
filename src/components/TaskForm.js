@@ -4,9 +4,20 @@ class TaskForm extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			name : '',
-			status : false
+			name: '',
+			status: false,
+			id: ''
 		}
+	}
+	componentDidMount() {
+		var update = this.props.tasksUpdate;
+		this.setState({
+			name: update.name,
+			status: update.status,
+			id: update.id
+		});
+		console.log(update.name);
+		console.log(this.state);
 	}
 	onSubmit = (event) => {
 		event.preventDefault();
@@ -16,14 +27,14 @@ class TaskForm extends Component {
 		this.props.receiveDataFromTaskFormNews(this.state, 0, this.state.name);
 	}
 	onChange = (event) => {
-		var {target} = event;
+		var { target } = event;
 		var name = target.name;
 		var value = target.type === 'checked' ? target.checked : target.value
-		if(name === 'status') {
+		if (name === 'status') {
 			value = target.value === 'true' ? true : false
 		}
 		this.setState({
-			[name] : value
+			[name]: value
 		});
 	}
 	onClick = (event) => {
@@ -33,7 +44,9 @@ class TaskForm extends Component {
 		return (
 			<div class="panel panel-warning">
 				<div class="panel-heading">
-					<h3 class="panel-title">Thêm Công Việc</h3>
+					<h3 class="panel-title">
+						{this.state.id !== '' ? 'Cập Nhật Công Việc' : 'Thêm Công Việc'}
+					</h3>
 					<i class="fas fa-window-close" onClick={this.onClick}></i>
 				</div>
 
@@ -44,16 +57,16 @@ class TaskForm extends Component {
 						<div class="form-group">
 							<label>Tên :</label>
 							<input type="text" class="form-control"
-							name="name"
-							value={this.state.name}
-							onChange={this.onChange} />
+								name="name"
+								value={this.state.name}
+								onChange={this.onChange} />
 						</div>
 						<label>Trạng Thái :</label>
 						<select class="form-control"
-						onChange={this.onChange}
-						name="status"
-						value={this.state.status}
-						required="required">
+							onChange={this.onChange}
+							name="status"
+							value={this.state.status}
+							required="required">
 							<option value={true}>Kích Hoạt</option>
 							<option value={false}>Ẩn</option>
 						</select>

@@ -53,8 +53,31 @@ class App extends Component {
       rdLanguage: 'vi',
       cbAgree: false,
       tasks: [],
-      status: false
+      status: false,
+      tasksUpdate: []
     };
+  }
+  receiveDataFromTaskItemUpdate = (id) => {
+     if (this.state.status === false) {
+      this.setState({
+        status: true
+      });
+      var { tasks, tasksUpdate } = this.state;
+      tasks.forEach((values, index) => {
+        if (values.id === id) {
+          this.setState({
+            tasksUpdate: values
+          });
+        }
+      });
+      console.log(tasksUpdate);
+    }
+    else {
+      alert("Bạn Phải Tắt Trạng Thái Cập Nhật Trước!!!");
+      this.setState({
+        status: false
+      });
+    }
   }
   receiveDataFromTaskItemDelete = (id) => {
     var { tasks } = this.state;
@@ -85,7 +108,7 @@ class App extends Component {
         }
       }
       this.setState({
-        tasks: tasks
+        tasks: tasks,
       });
     });
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -97,7 +120,8 @@ class App extends Component {
       data.id = this.generateID();
       tasks.push(data);
       this.setState({
-        tasks: tasks
+        tasks: tasks,
+        tasksUpdate : null
       });
       localStorage.setItem("tasks", JSON.stringify(tasks));
     }
@@ -218,6 +242,7 @@ class App extends Component {
   }
   render() {
     var status = this.state.status === false ? '' : <TaskForm
+      tasksUpdate={this.state.tasksUpdate}
       receiveDataFromTaskFormNews={this.receiveDataFromTaskFormNews}
       receiveDataFromTaskForm={this.receiveDataFromTaskForm} />
     var { tasks } = this.state;
@@ -272,6 +297,7 @@ class App extends Component {
 
               <div class="row mt-15">
                 <TaskList
+                  receiveDataFromTaskItemUpdate={this.receiveDataFromTaskItemUpdate}
                   receiveDataFromTaskItemDelete={this.receiveDataFromTaskItemDelete}
                   tasks={tasks} receiveDataFromTaskItem={this.receiveDataFromTaskItem} />
               </div>

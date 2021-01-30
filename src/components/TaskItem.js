@@ -6,6 +6,9 @@ class TaskItem extends Component {
   onDelete = () => {
     this.props.receiveDataFromTaskItemDelete(this.props.index);
   }
+  onUpdate = () => {
+    this.props.receiveDataFromTaskItemUpdate(this.props.id);
+  }
   render() {
     return (
       <tr>
@@ -17,7 +20,7 @@ class TaskItem extends Component {
           </span>
         </td>
         <td class="text-center">
-          <button type="button" class="btn btn-warning">
+          <button type="button" class="btn btn-warning" onClick={this.onUpdate}>
             Sửa
           </button>
           &nbsp;

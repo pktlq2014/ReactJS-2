@@ -11,6 +11,7 @@ class TaskList extends Component {
                 key={values.id}
                 receiveDataFromTaskItem={this.props.receiveDataFromTaskItem}
                 index={index}
+                receiveDataFromTaskItemUpdate={this.props.receiveDataFromTaskItemUpdate}
                 receiveDataFromTaskItemDelete={this.props.receiveDataFromTaskItemDelete}
                 id={values.id}
                 name={values.name}
