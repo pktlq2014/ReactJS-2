@@ -116,18 +116,38 @@ class App extends Component {
   receiveDataFromTaskFormNews = (data, status, name) => {
     console.log(data);
     var { tasks } = this.state;
-    if (name !== "") {
-      data.id = this.generateID();
-      tasks.push(data);
-      this.setState({
-        tasks: tasks
-      });
-      localStorage.setItem("tasks", JSON.stringify(tasks));
+    // có id là edit, không có id là add
+    if (data.id === "") {
+      if (name !== "") {
+        data.id = this.generateID();
+        tasks.push(data);
+        this.setState({
+          tasks: tasks
+        });
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+      }
+      if (status === 0) {
+        this.setState({
+          status: false
+        });
+      }
     }
-    if (status === 0) {
-      this.setState({
-        status: false
-      });
+    else {
+      tasks.forEach((values, index) => {
+        if(values.id === data.id) {
+          values.name = data.name;
+          values.status = data.status;
+          this.setState({
+            tasks: tasks
+          });
+          localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+        if (status === 0) {
+          this.setState({
+            status: false
+          });
+        }
+      }); 
     }
   }
   receiveDataFromTaskForm = (data) => {
