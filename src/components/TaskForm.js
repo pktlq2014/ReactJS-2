@@ -1,6 +1,31 @@
 import React, { Component } from "react"
 
 class TaskForm extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			name : '',
+			status : false
+		}
+	}
+	onSubmit = (event) => {
+		event.preventDefault();
+		var sl = this.state.status;
+		console.log(this.state.name);
+		console.log(typeof sl);
+		this.props.receiveDataFromTaskFormNews(this.state);
+	}
+	onChange = (event) => {
+		var {target} = event;
+		var name = target.name;
+		var value = target.type === 'checked' ? target.checked : target.value
+		if(name === 'slActiveTaskForm') {
+			value = target.value === 'true' ? true : false
+		}
+		this.setState({
+			[name] : value
+		});
+	}
 	onClick = (event) => {
 		this.props.receiveDataFromTaskForm(0);
 	}
@@ -15,15 +40,22 @@ class TaskForm extends Component {
 
 
 				<div class="panel-body">
-					<form>
+					<form onSubmit={this.onSubmit}>
 						<div class="form-group">
 							<label>Tên :</label>
-							<input type="text" class="form-control" />
+							<input type="text" class="form-control"
+							name="name"
+							value={this.state.name}
+							onChange={this.onChange} />
 						</div>
 						<label>Trạng Thái :</label>
-						<select class="form-control" required="required">
-							<option value="1">Kích Hoạt</option>
-							<option value="0">Ẩn</option>
+						<select class="form-control"
+						onChange={this.onChange}
+						name="status"
+						value={this.state.status}
+						required="required">
+							<option value={true}>Kích Hoạt</option>
+							<option value={false}>Ẩn</option>
 						</select>
 						<br />
 						<div class="text-center">

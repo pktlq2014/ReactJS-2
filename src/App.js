@@ -56,6 +56,16 @@ class App extends Component {
       status : false
     };
   }
+  receiveDataFromTaskFormNews = (data) => {
+    console.log(data);
+    var {tasks} = this.state;
+    data.id = this.generateID();
+    tasks.push(data);
+    this.setState({
+      tasks : tasks
+    });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
   receiveDataFromTaskForm = (data) => {
     if(data === 0) {
       this.setState({
@@ -166,7 +176,9 @@ class App extends Component {
     console.log(this.refs.name.value);
   }
   render() {
-    var status = this.state.status === false ? '' : <TaskForm receiveDataFromTaskForm={this.receiveDataFromTaskForm}/>
+    var status = this.state.status === false ? '' : <TaskForm 
+    receiveDataFromTaskFormNews={this.receiveDataFromTaskFormNews}
+    receiveDataFromTaskForm={this.receiveDataFromTaskForm}/>
     var {tasks} = this.state;
     var elementsProduct = this.state.products.map((values, index) => {
       var result = '';
