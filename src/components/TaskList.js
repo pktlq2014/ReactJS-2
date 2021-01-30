@@ -8,7 +8,9 @@ class TaskList extends Component {
         var showTaskItem = tasks.map((values, index) => {
             return <TaskItem
                 key={values.id}
+                receiveDataFromTaskItem={this.props.receiveDataFromTaskItem}
                 index={index}
+                id={values.id}
                 name={values.name}
                 status={values.status}
             />

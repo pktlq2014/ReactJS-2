@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 class TaskItem extends Component {
+  onClick = () => {
+    this.props.receiveDataFromTaskItem(this.props.id);
+  }
   render() {
     return (
       <tr>
         <td>{this.props.index}</td>
         <td>{this.props.name}</td>
         <td class="text-center">
-          <span class={this.props.status === true ? 'label label-success' : 'label label-danger'}>
+          <span onClick={this.onClick} class={this.props.status === true ? 'label label-success' : 'label label-danger'}>
             {this.props.status === true ? 'Kích Hoạt' : 'Ẩn'}
           </span>
         </td>

@@ -56,6 +56,22 @@ class App extends Component {
       status : false
     };
   }
+  receiveDataFromTaskItem = (id) => {
+    var {tasks} = this.state;
+    tasks.forEach((values, index) => {
+      if(values.id === id) {
+        if(values.status === true) {
+          values.status = false;
+        }
+        else {
+          values.status = true;
+        }
+      }
+      this.setState({
+        tasks : tasks
+      });
+    });
+  }
   receiveDataFromTaskFormNews = (data) => {
     console.log(data);
     var {tasks} = this.state;
@@ -230,7 +246,7 @@ class App extends Component {
 
 
               <div class="row mt-15">
-                <TaskList tasks={tasks}/>
+                <TaskList tasks={tasks} receiveDataFromTaskItem={this.receiveDataFromTaskItem}/>
               </div>
             </div>
           </div>

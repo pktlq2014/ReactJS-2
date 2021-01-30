@@ -19,7 +19,7 @@ class TaskForm extends Component {
 		var {target} = event;
 		var name = target.name;
 		var value = target.type === 'checked' ? target.checked : target.value
-		if(name === 'slActiveTaskForm') {
+		if(name === 'status') {
 			value = target.value === 'true' ? true : false
 		}
 		this.setState({
