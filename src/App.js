@@ -58,7 +58,7 @@ class App extends Component {
     };
   }
   receiveDataFromTaskItemUpdate = (id) => {
-     if (this.state.status === false) {
+    if (this.state.status === false) {
       this.setState({
         status: true
       });
@@ -73,7 +73,7 @@ class App extends Component {
       console.log(tasksUpdate);
     }
     else {
-      alert("Bạn Phải Tắt Trạng Thái Cập Nhật Trước!!!");
+      alert("Bạn Phải Tắt Chức Năng Trước Đó!!!");
       this.setState({
         status: false
       });
@@ -120,8 +120,7 @@ class App extends Component {
       data.id = this.generateID();
       tasks.push(data);
       this.setState({
-        tasks: tasks,
-        tasksUpdate : null
+        tasks: tasks
       });
       localStorage.setItem("tasks", JSON.stringify(tasks));
     }
@@ -142,12 +141,14 @@ class App extends Component {
     var { status } = this.state;
     if (status === true) {
       this.setState({
-        status: false
+        status: false,
+        tasksUpdate: null
       });
     }
     else {
       this.setState({
-        status: true
+        status: true,
+        tasksUpdate: null
       });
     }
   }

@@ -11,13 +11,15 @@ class TaskForm extends Component {
 	}
 	componentDidMount() {
 		var update = this.props.tasksUpdate;
-		this.setState({
-			name: update.name,
-			status: update.status,
-			id: update.id
-		});
-		console.log(update.name);
-		console.log(this.state);
+		if (update) {
+			this.setState({
+				name: update.name,
+				status: update.status,
+				id: update.id
+			});
+			console.log(update.name);
+			console.log(this.state);
+		}
 	}
 	onSubmit = (event) => {
 		event.preventDefault();
