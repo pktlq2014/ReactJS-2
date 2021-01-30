@@ -6,11 +6,12 @@ class TaskList extends Component {
         var {tasks} = this.props;
         console.log(this.props.tasks);
         var showTaskItem = tasks.map((values, index) => {
-            index += 1;
+            //index += 1;
             return <TaskItem
                 key={values.id}
                 receiveDataFromTaskItem={this.props.receiveDataFromTaskItem}
                 index={index}
+                receiveDataFromTaskItemDelete={this.props.receiveDataFromTaskItemDelete}
                 id={values.id}
                 name={values.name}
                 status={values.status}

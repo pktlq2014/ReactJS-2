@@ -56,6 +56,23 @@ class App extends Component {
       status : false
     };
   }
+  receiveDataFromTaskItemDelete = (id) => {
+    var {tasks} = this.state;
+    tasks.splice(id, 1);
+    this.setState({
+      tasks : tasks
+    });
+
+
+
+    // var result = tasks.filter((values, index) => {
+    //   return values.id !== id;
+    // })
+    this.setState({
+      tasks : tasks
+    });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
   receiveDataFromTaskItem = (id) => {
     var {tasks} = this.state;
     tasks.forEach((values, index) => {
@@ -71,6 +88,7 @@ class App extends Component {
         tasks : tasks
       });
     });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }
   receiveDataFromTaskFormNews = (data, status) => {
     console.log(data);
@@ -251,7 +269,9 @@ class App extends Component {
 
 
               <div class="row mt-15">
-                <TaskList tasks={tasks} receiveDataFromTaskItem={this.receiveDataFromTaskItem}/>
+                <TaskList 
+                receiveDataFromTaskItemDelete={this.receiveDataFromTaskItemDelete}
+                tasks={tasks} receiveDataFromTaskItem={this.receiveDataFromTaskItem}/>
               </div>
             </div>
           </div>

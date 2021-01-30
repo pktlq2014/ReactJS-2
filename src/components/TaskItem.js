@@ -3,10 +3,13 @@ class TaskItem extends Component {
   onClick = () => {
     this.props.receiveDataFromTaskItem(this.props.id);
   }
+  onDelete = () => {
+    this.props.receiveDataFromTaskItemDelete(this.props.index);
+  }
   render() {
     return (
       <tr>
-        <td>{this.props.index}</td>
+        <td>{this.props.index+1}</td>
         <td>{this.props.name}</td>
         <td class="text-center">
           <span onClick={this.onClick} class={this.props.status === true ? 'label label-success' : 'label label-danger'}>
@@ -18,7 +21,7 @@ class TaskItem extends Component {
             Sửa
           </button>
           &nbsp;
-          <button type="button" class="btn btn-danger">
+          <button onClick={this.onDelete} type="button" class="btn btn-danger">
             Xóa
           </button>
         </td>
