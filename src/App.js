@@ -53,14 +53,14 @@ class App extends Component {
       rdLanguage: 'vi',
       cbAgree: false,
       tasks: [],
-      status : false
+      status: false
     };
   }
   receiveDataFromTaskItemDelete = (id) => {
-    var {tasks} = this.state;
+    var { tasks } = this.state;
     tasks.splice(id, 1);
     this.setState({
-      tasks : tasks
+      tasks: tasks
     });
 
 
@@ -69,15 +69,15 @@ class App extends Component {
     //   return values.id !== id;
     // })
     this.setState({
-      tasks : tasks
+      tasks: tasks
     });
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }
   receiveDataFromTaskItem = (id) => {
-    var {tasks} = this.state;
+    var { tasks } = this.state;
     tasks.forEach((values, index) => {
-      if(values.id === id) {
-        if(values.status === true) {
+      if (values.id === id) {
+        if (values.status === true) {
           values.status = false;
         }
         else {
@@ -85,43 +85,45 @@ class App extends Component {
         }
       }
       this.setState({
-        tasks : tasks
+        tasks: tasks
       });
     });
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }
-  receiveDataFromTaskFormNews = (data, status) => {
+  receiveDataFromTaskFormNews = (data, status, name) => {
     console.log(data);
-    var {tasks} = this.state;
-    data.id = this.generateID();
-    tasks.push(data);
-    this.setState({
-      tasks : tasks
-    });
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    if(status === 0) {
+    var { tasks } = this.state;
+    if (name !== "") {
+      data.id = this.generateID();
+      tasks.push(data);
       this.setState({
-        status : false
+        tasks: tasks
+      });
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+    if (status === 0) {
+      this.setState({
+        status: false
       });
     }
   }
   receiveDataFromTaskForm = (data) => {
-    if(data === 0) {
+    if (data === 0) {
       this.setState({
-        status : false
+        status: false
       });
     }
   }
   showTaskForm = () => {
-    var {status} = this.state;
-    if(status === true) {
+    var { status } = this.state;
+    if (status === true) {
       this.setState({
-        status : false
+        status: false
       });
     }
     else {
       this.setState({
-        status : true
+        status: true
       });
     }
   }
@@ -135,32 +137,32 @@ class App extends Component {
     )
   }
   componentDidMount() {
-    if(localStorage && localStorage.getItem("tasks")) {
+    if (localStorage && localStorage.getItem("tasks")) {
       this.setState({
-        tasks : JSON.parse(localStorage.getItem("tasks"))
+        tasks: JSON.parse(localStorage.getItem("tasks"))
       });
     }
   }
   onClick = (event) => {
     var tasks = [
       {
-        id : this.generateID(),
-        name : "AAA",
-        status : true
+        id: this.generateID(),
+        name: "AAA",
+        status: true
       },
       {
-        id : this.generateID(),
-        name : "BBB",
-        status : false
+        id: this.generateID(),
+        name: "BBB",
+        status: false
       },
       {
-        id : this.generateID(),
-        name : "CCC",
-        status : true
+        id: this.generateID(),
+        name: "CCC",
+        status: true
       },
     ]
     this.setState({
-      tasks : tasks
+      tasks: tasks
     });
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }
@@ -215,10 +217,10 @@ class App extends Component {
     console.log(this.refs.name.value);
   }
   render() {
-    var status = this.state.status === false ? '' : <TaskForm 
-    receiveDataFromTaskFormNews={this.receiveDataFromTaskFormNews}
-    receiveDataFromTaskForm={this.receiveDataFromTaskForm}/>
-    var {tasks} = this.state;
+    var status = this.state.status === false ? '' : <TaskForm
+      receiveDataFromTaskFormNews={this.receiveDataFromTaskFormNews}
+      receiveDataFromTaskForm={this.receiveDataFromTaskForm} />
+    var { tasks } = this.state;
     var elementsProduct = this.state.products.map((values, index) => {
       var result = '';
       result = <ProductTable
@@ -269,9 +271,9 @@ class App extends Component {
 
 
               <div class="row mt-15">
-                <TaskList 
-                receiveDataFromTaskItemDelete={this.receiveDataFromTaskItemDelete}
-                tasks={tasks} receiveDataFromTaskItem={this.receiveDataFromTaskItem}/>
+                <TaskList
+                  receiveDataFromTaskItemDelete={this.receiveDataFromTaskItemDelete}
+                  tasks={tasks} receiveDataFromTaskItem={this.receiveDataFromTaskItem} />
               </div>
             </div>
           </div>

@@ -13,7 +13,7 @@ class TaskForm extends Component {
 		var sl = this.state.status;
 		console.log(this.state.name);
 		console.log(typeof sl);
-		this.props.receiveDataFromTaskFormNews(this.state, 0);
+		this.props.receiveDataFromTaskFormNews(this.state, 0, this.state.name);
 	}
 	onChange = (event) => {
 		var {target} = event;
