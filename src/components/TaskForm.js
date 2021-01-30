@@ -13,7 +13,7 @@ class TaskForm extends Component {
 		var sl = this.state.status;
 		console.log(this.state.name);
 		console.log(typeof sl);
-		this.props.receiveDataFromTaskFormNews(this.state);
+		this.props.receiveDataFromTaskFormNews(this.state, 0);
 	}
 	onChange = (event) => {
 		var {target} = event;
@@ -60,7 +60,7 @@ class TaskForm extends Component {
 						<br />
 						<div class="text-center">
 							<button type="submit" class="btn btn-warning">Thêm</button>&nbsp;
-                        	<button type="submit" class="btn btn-danger">Hủy Bỏ</button>
+                        	<button type="submit" class="btn btn-danger" onClick={this.onClick}>Hủy Bỏ</button>
 						</div>
 					</form>
 				</div>

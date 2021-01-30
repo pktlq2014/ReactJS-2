@@ -72,7 +72,7 @@ class App extends Component {
       });
     });
   }
-  receiveDataFromTaskFormNews = (data) => {
+  receiveDataFromTaskFormNews = (data, status) => {
     console.log(data);
     var {tasks} = this.state;
     data.id = this.generateID();
@@ -81,6 +81,11 @@ class App extends Component {
       tasks : tasks
     });
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    if(status === 0) {
+      this.setState({
+        status : false
+      });
+    }
   }
   receiveDataFromTaskForm = (data) => {
     if(data === 0) {
