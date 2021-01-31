@@ -2,8 +2,27 @@ import React, { Component } from 'react';
 import TaskItem from './TaskItem';
 
 class TaskList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            txtNameTaskList : '',
+            slActiveTaskList : -1
+        }
+    }
+    onChange = (event) => {
+        var {target} = event;
+        var name = target.name;
+        var value = target.value;
+        this.setState({
+            [name] : value
+        });
+        this.props.receiveDataFromTaskItemSeachActive(
+            name === 'txtNameTaskList' ? value : this.state.txtNameTaskList,
+            name === 'slActiveTaskList' ? value : this.state.slActiveTaskList
+        )
+    }
     render() {
-        var {tasks} = this.props;
+        var { tasks } = this.props;
         console.log(this.props.tasks);
         var showTaskItem = tasks.map((values, index) => {
             //index += 1;
@@ -33,10 +52,17 @@ class TaskList extends Component {
                         <tr>
                             <td></td>
                             <td>
-                                <input type="text" class="form-control" />
+                                <input
+                                    name="txtNameTaskList"
+                                    value={this.props.txtNameTaskList}
+                                    onChange={this.onChange}
+                                    type="text" class="form-control" />
                             </td>
                             <td>
-                                <select class="form-control">
+                                <select class="form-control"
+                                    name="slActiveTaskList"
+                                    value={this.props.slActiveTaskList}
+                                    onChange={this.onChange}>
                                     <option value="-1">Tất Cả</option>
                                     <option value="0">Ẩn</option>
                                     <option value="1">Kích Hoạt</option>
@@ -48,7 +74,7 @@ class TaskList extends Component {
 
 
                         {showTaskItem}
-                        </tbody>
+                    </tbody>
                 </table>
             </div>
         );

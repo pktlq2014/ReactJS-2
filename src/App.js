@@ -54,8 +54,23 @@ class App extends Component {
       cbAgree: false,
       tasks: [],
       status: false,
-      tasksUpdate: []
+      tasksUpdate: [],
+      search: {
+        name: '',
+        active: -1
+      }
     };
+  }
+  receiveDataFromTaskItemSeachActive = (name, active) => {
+    console.log(name, active);
+    var active1 = parseInt(active);
+    console.log(typeof active1);
+    this.setState({
+      search: {
+        name: name.toLowerCase(),
+        active: active1
+      }
+    });
   }
   receiveDataFromTaskItemUpdate = (id) => {
     if (this.state.status === false) {
@@ -134,7 +149,7 @@ class App extends Component {
     }
     else {
       tasks.forEach((values, index) => {
-        if(values.id === data.id) {
+        if (values.id === data.id) {
           values.name = data.name;
           values.status = data.status;
           this.setState({
@@ -147,7 +162,7 @@ class App extends Component {
             status: false
           });
         }
-      }); 
+      });
     }
   }
   receiveDataFromTaskForm = (data) => {
@@ -266,7 +281,25 @@ class App extends Component {
       tasksUpdate={this.state.tasksUpdate}
       receiveDataFromTaskFormNews={this.receiveDataFromTaskFormNews}
       receiveDataFromTaskForm={this.receiveDataFromTaskForm} />
-    var { tasks } = this.state;
+    var { tasks, search } = this.state;
+    console.log(search);
+    // lấy được task mới sau khi search
+    if (search.name !== '') {
+      tasks = tasks.filter((values, index) => {
+        // lọc chữ mới dùng indexOf, còn lọc true, false thì = true or false thôi
+        return values.name.toLowerCase().indexOf(search.name) !== -1;
+      });
+    }
+    // tiếp tục lấy task mới này lọc qua true or false
+    tasks = tasks.filter((values, index) => {
+      if (search.active === -1) {
+        return tasks;
+      }
+      else {
+        return values.status === (search.active === 0 ? false : true);
+      }
+    });
+    console.log(tasks);
     var elementsProduct = this.state.products.map((values, index) => {
       var result = '';
       result = <ProductTable
@@ -318,6 +351,7 @@ class App extends Component {
 
               <div class="row mt-15">
                 <TaskList
+                  receiveDataFromTaskItemSeachActive={this.receiveDataFromTaskItemSeachActive}
                   receiveDataFromTaskItemUpdate={this.receiveDataFromTaskItemUpdate}
                   receiveDataFromTaskItemDelete={this.receiveDataFromTaskItemDelete}
                   tasks={tasks} receiveDataFromTaskItem={this.receiveDataFromTaskItem} />
