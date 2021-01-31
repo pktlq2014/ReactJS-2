@@ -67,3 +67,11 @@ span {
 .mr-15 {
   margin-right: 5rem;
 }
+.sort_selected:after {
+  content: '\f00c';
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  margin: 0px 0px 0px 10px;
+  display: inline-block;
+}

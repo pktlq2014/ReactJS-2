@@ -59,12 +59,25 @@ class App extends Component {
         name: '',
         active: -1
       },
-      txtKey : ''
+      txtKey: '',
+      sort: {
+        values: '',
+        data: 0
+      }
     };
+  }
+  receiveDataFromSort = (values, data) => {
+    console.log(values, data);
+    this.setState({
+      sort: {
+        values: values,
+        data: data
+      }
+    });
   }
   receiveDataFromSearch = (values) => {
     this.setState({
-      txtKey : values.toLowerCase()
+      txtKey: values.toLowerCase()
     });
   }
   receiveDataFromTaskItemSeachActive = (name, active) => {
@@ -287,9 +300,36 @@ class App extends Component {
       tasksUpdate={this.state.tasksUpdate}
       receiveDataFromTaskFormNews={this.receiveDataFromTaskFormNews}
       receiveDataFromTaskForm={this.receiveDataFromTaskForm} />
-    var { tasks, search, txtKey } = this.state;
+    var { tasks, search, txtKey, sort } = this.state;
     console.log(search);
-    if(txtKey !== '') {
+    if(sort.values === 'alpha') {
+      tasks.sort((a, b) => {
+        if(a.name > b.name) {
+          return sort.data;
+        }
+        else if(a.name < b.name) {
+          return -sort.data;
+        }
+        else {
+          return 0;
+        }
+      });
+    }
+    else {
+      tasks.sort((a, b) => {
+        if(a.status > b.status) {
+          return -sort.data;
+        }
+        else if(a.status < b.status) {
+          return sort.data;
+        }
+        else {
+          return 0;
+        }
+      });
+    }
+    console.log(sort);
+    if (txtKey !== '') {
       tasks = tasks.filter((values, index) => {
         return values.name.toLowerCase().indexOf(txtKey) !== -1;
       })
@@ -357,6 +397,7 @@ class App extends Component {
 
 
               <Control
+                receiveDataFromSort={this.receiveDataFromSort}
                 receiveDataFromSearch={this.receiveDataFromSearch}
               />
 
