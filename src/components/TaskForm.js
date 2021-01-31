@@ -44,27 +44,27 @@ class TaskForm extends Component {
 	}
 	render() {
 		return (
-			<div class="panel panel-warning">
-				<div class="panel-heading">
-					<h3 class="panel-title">
+			<div className="panel panel-warning">
+				<div className="panel-heading">
+					<h3 className="panel-title">
 						{this.state.id !== '' ? 'Cập Nhật Công Việc' : 'Thêm Công Việc'}
 					</h3>
-					<i class="fas fa-window-close" onClick={this.onClick}></i>
+					<i className="fas fa-window-close" onClick={this.onClick}></i>
 				</div>
 
 
 
-				<div class="panel-body">
+				<div className="panel-body">
 					<form onSubmit={this.onSubmit}>
-						<div class="form-group">
+						<div className="form-group">
 							<label>Tên :</label>
-							<input type="text" class="form-control"
+							<input type="text" className="form-control"
 								name="name"
 								value={this.state.name}
 								onChange={this.onChange} />
 						</div>
 						<label>Trạng Thái :</label>
-						<select class="form-control"
+						<select className="form-control"
 							onChange={this.onChange}
 							name="status"
 							value={this.state.status}
@@ -73,9 +73,9 @@ class TaskForm extends Component {
 							<option value={false}>Ẩn</option>
 						</select>
 						<br />
-						<div class="text-center">
-							<button type="submit" class="btn btn-warning">Thêm</button>&nbsp;
-                        	<button type="submit" class="btn btn-danger" onClick={this.onClick}>Hủy Bỏ</button>
+						<div className="text-center">
+							<button type="submit" className="btn btn-warning">Thêm</button>&nbsp;
+                        	<button type="submit" className="btn btn-danger" onClick={this.onClick}>Hủy Bỏ</button>
 						</div>
 					</form>
 				</div>

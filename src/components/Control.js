@@ -5,14 +5,14 @@ import Sort from "./Sort"
 class Control extends Component {
 	render() {
 		return (
-			<div class="row mt-15">
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<Search />
+			<div className="row mt-15">
+				<div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<Search receiveDataFromSearch={this.props.receiveDataFromSearch}/>
 				</div>
 
 
 
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				<div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 					<Sort />
 				</div>
 			</div>

@@ -38,14 +38,14 @@ class TaskList extends Component {
             />
         });
         return (
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <table class="table table-bordered table-hover">
+            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <table className="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th class="text-center">STT</th>
-                            <th class="text-center">Tên</th>
-                            <th class="text-center">Trạng Thái</th>
-                            <th class="text-center">Hành Động</th>
+                            <th className="text-center">STT</th>
+                            <th className="text-center">Tên</th>
+                            <th className="text-center">Trạng Thái</th>
+                            <th className="text-center">Hành Động</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,10 +56,10 @@ class TaskList extends Component {
                                     name="txtNameTaskList"
                                     value={this.props.txtNameTaskList}
                                     onChange={this.onChange}
-                                    type="text" class="form-control" />
+                                    type="text" className="form-control" />
                             </td>
                             <td>
-                                <select class="form-control"
+                                <select className="form-control"
                                     name="slActiveTaskList"
                                     value={this.props.slActiveTaskList}
                                     onChange={this.onChange}>

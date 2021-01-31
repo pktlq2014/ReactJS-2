@@ -58,8 +58,14 @@ class App extends Component {
       search: {
         name: '',
         active: -1
-      }
+      },
+      txtKey : ''
     };
+  }
+  receiveDataFromSearch = (values) => {
+    this.setState({
+      txtKey : values.toLowerCase()
+    });
   }
   receiveDataFromTaskItemSeachActive = (name, active) => {
     console.log(name, active);
@@ -281,8 +287,13 @@ class App extends Component {
       tasksUpdate={this.state.tasksUpdate}
       receiveDataFromTaskFormNews={this.receiveDataFromTaskFormNews}
       receiveDataFromTaskForm={this.receiveDataFromTaskForm} />
-    var { tasks, search } = this.state;
+    var { tasks, search, txtKey } = this.state;
     console.log(search);
+    if(txtKey !== '') {
+      tasks = tasks.filter((values, index) => {
+        return values.name.toLowerCase().indexOf(txtKey) !== -1;
+      })
+    }
     // lấy được task mới sau khi search
     if (search.name !== '') {
       tasks = tasks.filter((values, index) => {
@@ -323,33 +334,35 @@ class App extends Component {
     });
     return (
       <div>
-        <div class="container">
-          <div class="text-center">
+        <div className="container">
+          <div className="text-center">
             <h1>Quản Lý Công Việc</h1>
             <hr />
           </div>
-          <div class="row">
-            <div class={this.state.status === true ? 'col-xs-4 col-sm-4 col-md-4 col-lg-4' : 'col-xs-0 col-sm-0 col-md-0 col-lg-0'}>
+          <div className="row">
+            <div className={this.state.status === true ? 'col-xs-4 col-sm-4 col-md-4 col-lg-4' : 'col-xs-0 col-sm-0 col-md-0 col-lg-0'}>
               {status}
             </div>
 
 
 
-            <div class={this.state.status === true ? 'col-xs-8 col-sm-8 col-md-8 col-lg-8' : 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}>
-              <button type="button" class="btn btn-primary" onClick={this.showTaskForm}>
-                <i class="fa fa-plus mr-5"></i>Thêm Công Việc
+            <div className={this.state.status === true ? 'col-xs-8 col-sm-8 col-md-8 col-lg-8' : 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}>
+              <button type="button" className="btn btn-primary" onClick={this.showTaskForm}>
+                <i className="fa fa-plus mr-5"></i>Thêm Công Việc
               </button>
-              <button type="button" class="btn btn-danger" onClick={this.onClick}>
-                <i class="fa fa-plus mr-5"></i>Generator
+              <button type="button" className="btn btn-danger" onClick={this.onClick}>
+                <i className="fa fa-plus mr-5"></i>Generator
               </button>
 
 
 
-              <Control />
+              <Control
+                receiveDataFromSearch={this.receiveDataFromSearch}
+              />
 
 
 
-              <div class="row mt-15">
+              <div className="row mt-15">
                 <TaskList
                   receiveDataFromTaskItemSeachActive={this.receiveDataFromTaskItemSeachActive}
                   receiveDataFromTaskItemUpdate={this.receiveDataFromTaskItemUpdate}

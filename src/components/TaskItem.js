@@ -14,17 +14,17 @@ class TaskItem extends Component {
       <tr>
         <td>{this.props.index+1}</td>
         <td>{this.props.name}</td>
-        <td class="text-center">
-          <span onClick={this.onClick} class={this.props.status === true ? 'label label-success' : 'label label-danger'}>
+        <td className="text-center">
+          <span onClick={this.onClick} className={this.props.status === true ? 'label label-success' : 'label label-danger'}>
             {this.props.status === true ? 'Kích Hoạt' : 'Ẩn'}
           </span>
         </td>
-        <td class="text-center">
-          <button type="button" class="btn btn-warning" onClick={this.onUpdate}>
+        <td className="text-center">
+          <button type="button" className="btn btn-warning" onClick={this.onUpdate}>
             Sửa
           </button>
           &nbsp;
-          <button onClick={this.onDelete} type="button" class="btn btn-danger">
+          <button onClick={this.onDelete} type="button" className="btn btn-danger">
             Xóa
           </button>
         </td>
